@@ -5,17 +5,17 @@ namespace SiftIsland;
 
 public class Game
 {
-    private List<Entity> entities = new List<Entity> { new Player(new Vector2(400, 300)) };
+    readonly Player player = new Player(new Vector2(400, 300));
+    readonly Inputhandler inputHandler = new();
 
     public void Update(float dt)
     {
-        foreach (var e in entities)
-            e.Update(dt);
+        InputState input = inputHandler.Read();
+        player.Update(dt, input);
     }
 
     public void Draw()
     {
-        foreach (var e in entities)
-            e.Draw();
+        player.Draw();
     }
 }

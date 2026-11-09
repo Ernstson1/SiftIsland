@@ -46,6 +46,16 @@ public class TileMap
 
     public Vector2 Center => new(PixelWidht / 2f, PixelHeight / 2f);
 
+    public bool IsWalkable(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= Width || y >= Height)
+            return false;
+        return tiles[x, y] == TileType.Grass;
+    }
+
+    public bool IsWalkableAtPixel(float px, float py) =>
+        IsWalkable((int)MathF.Floor(px / TileSize), (int)MathF.Floor(py / TileSize));
+
     public void Draw()
     {
         for (int y = 0; y < Height; y++)

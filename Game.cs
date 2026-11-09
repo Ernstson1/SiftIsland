@@ -10,6 +10,8 @@ public class Game
     readonly Inputhandler inputHandler = new();
     readonly TileMap map;
 
+    public static bool Debug = false;
+
     // Temporary:
     Camera2D camera = new()
     {
@@ -31,7 +33,8 @@ public class Game
 
     public void Draw()
     {
-        camera.Target = player.Position;
+        static Vector2 Snap(Vector2 v) => new(MathF.Round(v.X), MathF.Round(v.Y));
+        camera.Target = Snap(player.Position);
 
         Raylib.BeginMode2D(camera);
         map.Draw();
